@@ -1,0 +1,14 @@
+{
+  "style_route": "seasonal-editorial",
+  "palette": "coral-cream",
+  "product": "重复图片样例",
+  "sources": [],
+  "unverified": [],
+  "asset_usage": [
+    {
+      "file": "assets/same.jpg",
+      "source": "user-supplied fixture",
+      "role": "main"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "style_route": "bauhaus-bright",
+  "palette": "classic",
+  "product": "示例产品",
+  "core_question": "现在值不值？",
+  "core_claim": "适合明确需求，不适合盲目囤货。",
+  "market_basis": "mainland China / RMB unless user specifies otherwise",
+  "graphic_price_policy": "only verified mainland China hard prices may appear in HTML",
+  "sources": [
+    {
+      "title": "User supplied fixture data",
+      "type": "fixture"
+    }
+  ],
+  "unverified": [],
+  "asset_usage": [],
+  "omitted_page_types": [
+    "evidence-sample"
+  ]
+}

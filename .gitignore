@@ -1,0 +1,11 @@
+.DS_Store
+node_modules/
+local-tests/
+review-verdict-*/
+output/
+package-lock.json
+assets/fonts/*.woff2
+assets/fonts/*.otf
+assets/fonts/*.ttf
+assets/fonts/*.woff
+*.log

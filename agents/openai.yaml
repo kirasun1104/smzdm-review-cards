@@ -1,0 +1,7 @@
+interface:
+  display_name: "SMZDM Review Cards"
+  short_description: "评测内容转值得买购买判断卡"
+  default_prompt: "Use $smzdm-review-cards to turn this product review into a 3:4 buying-verdict carousel."
+
+policy:
+  allow_implicit_invocation: true

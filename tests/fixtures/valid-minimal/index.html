@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-CN" data-style="bauhaus-bright" data-palette="classic">
+  <head>
+    <meta charset="utf-8">
+    <title>Valid Minimal Review Deck</title>
+    <style>
+      * { box-sizing: border-box; }
+      body { margin: 0; font-family: Arial, "PingFang SC", sans-serif; }
+      .poster {
+        width: 1080px;
+        height: 1440px;
+        padding: 80px;
+        background: #f7f2e8;
+        color: #111;
+        display: grid;
+        align-content: start;
+        gap: 36px;
+      }
+      .kicker { font-size: 28px; font-weight: 700; }
+      .h-xl { font-size: 88px; line-height: 1.02; margin: 0; }
+      .h-md { font-size: 64px; line-height: 1.08; margin: 0; }
+      .lead, .body, .note { font-size: 30px; line-height: 1.45; margin: 0; }
+      .ledger, .compare-grid, .risk-strip, .issue-strip, .price-formula {
+        border: 4px solid #111;
+        padding: 28px;
+      }
+      .split-row, .compare-card, .formula-step, .bws-card {
+        border-top: 2px solid #111;
+        padding: 18px 0;
+      }
+      .split-row:first-child, .compare-card:first-child, .formula-step:first-child, .bws-card:first-child { border-top: 0; }
+      .label { font-weight: 700; margin-bottom: 8px; }
+      .value, .num { font-size: 42px; font-weight: 700; }
+      .risk, .issue-strip span { display: block; font-size: 28px; line-height: 1.35; }
+      .foot {
+        margin-top: auto;
+        border-top: 3px solid #111;
+        padding-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="poster" data-page-type="cover-verdict">
+      <div class="kicker">购买判断</div>
+      <h1 class="h-xl">示例产品值不值</h1>
+      <p class="lead">一句话判断：明确需求可买，冲动囤货先等等。</p>
+      <div class="issue-strip">
+        <span>买点：核心收益清楚。</span>
+        <span>代价：需要接受取舍。</span>
+        <span>动作：确认需求再买。</span>
+      </div>
+      <div class="foot"><span>SMZDM REVIEW</span><span>01</span></div>
+    </section>
+
+    <section class="poster" data-page-type="mechanism-explainer">
+      <div class="kicker">机制判断</div>
+      <h2 class="h-md">先看它解决什么</h2>
+      <div class="ledger">
+        <div class="split-row"><div class="label">收益</div><p class="body">减少选择成本，适合明确场景。</p></div>
+        <div class="split-row"><div class="label">代价</div><p class="body">泛用性一般，别当万能方案。</p></div>
+        <div class="split-row"><div class="label">动作</div><p class="body">先对照自己的使用频率。</p></div>
+      </div>
+      <div class="foot"><span>SMZDM REVIEW</span><span>02</span></div>
+    </section>
+
+    <section class="poster" data-page-type="variant-comparison">
+      <div class="kicker">版本选择</div>
+      <h2 class="h-md">基础版和高配版</h2>
+      <div class="compare-grid">
+        <article class="compare-card"><div class="label">基础版</div><div class="value">更稳妥</div><p class="note">预算敏感，先选基础。</p></article>
+        <article class="compare-card"><div class="label">高配版</div><div class="value">更省心</div><p class="note">高频使用，考虑高配。</p></article>
+      </div>
+      <div class="split-row"><div class="label">结论</div><p class="body">按频率选版本，不按参数冲动升级。</p></div>
+      <div class="foot"><span>SMZDM REVIEW</span><span>03</span></div>
+    </section>
+
+    <section class="poster" data-page-type="audience-fit">
+      <div class="kicker">人群匹配</div>
+      <h2 class="h-md">谁适合买</h2>
+      <div class="ledger">
+        <div class="split-row"><div class="label">适合买</div><p class="body">需求明确，能用满核心功能。</p></div>
+        <div class="split-row"><div class="label">可以等</div><p class="body">价格敏感，等活动价更稳。</p></div>
+        <div class="split-row"><div class="label">先别买</div><p class="body">只是尝鲜，先看长期评价。</p></div>
+        <div class="split-row"><div class="label">不适合</div><p class="body">已有替代方案，升级收益不大。</p></div>
+      </div>
+      <div class="foot"><span>SMZDM REVIEW</span><span>04</span></div>
+    </section>
+
+    <section class="poster" data-page-type="spec-price-ledger">
+      <div class="kicker">价格规格</div>
+      <h2 class="h-md">看五个决策点</h2>
+      <div class="ledger">
+        <div class="split-row"><div class="label">价格</div><p class="body">确认成交价后再判断。</p></div>
+        <div class="split-row"><div class="label">规格</div><p class="body">核心配置满足主场景。</p></div>
+        <div class="split-row"><div class="label">功能</div><p class="body">新增功能适合高频用户。</p></div>
+        <div class="split-row"><div class="label">风险</div><p class="body">低频使用容易闲置。</p></div>
+        <div class="split-row"><div class="label">替代</div><p class="body">同价位竞品也要比较。</p></div>
+      </div>
+      <div class="foot"><span>SMZDM REVIEW</span><span>05</span></div>
+    </section>
+
+    <section class="poster" data-page-type="final-verdict">
+      <div class="kicker">最终结论</div>
+      <h2 class="h-md">建议等好价</h2>
+      <div class="price-formula">
+        <div class="formula-step"><div class="label">建议买</div><div class="num">高频刚需</div></div>
+        <div class="formula-step"><div class="label">建议等</div><div class="num">价格敏感</div></div>
+        <div class="formula-step"><div class="label">不建议</div><div class="num">轻度尝鲜</div></div>
+      </div>
+      <div class="risk-strip">
+        <div class="risk">风险：低频用户回本慢。</div>
+        <div class="risk">限制：替代方案不少。</div>
+        <div class="risk">动作：先确认使用频率。</div>
+      </div>
+      <div class="foot"><span>SMZDM REVIEW</span><span>06</span></div>
+    </section>
+  </body>
+</html>

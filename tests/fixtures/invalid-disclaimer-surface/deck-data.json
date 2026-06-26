@@ -1,0 +1,10 @@
+{
+  "style_route": "seasonal-editorial",
+  "palette": "coral-cream",
+  "product": "免责卡面样例",
+  "sources": [],
+  "unverified": [
+    "版本包装与中文零售页来源说明应留在 deck-data/SOURCES，不应印在卡面"
+  ],
+  "asset_usage": []
+}

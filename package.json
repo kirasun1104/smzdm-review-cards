@@ -1,0 +1,18 @@
+{
+  "name": "smzdm-review-cards",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "validate": "node scripts/validate-review-deck.mjs",
+    "validate:strict": "node scripts/validate-review-deck.mjs --fail-on-warn",
+    "validate:soft": "node scripts/validate-review-deck.mjs",
+    "validate:text": "node scripts/validate-review-deck.mjs --text-only",
+    "render": "node scripts/render-review-deck.mjs",
+    "build": "node scripts/build-review-deck.mjs",
+    "build:strict": "node scripts/build-review-deck.mjs --strict",
+    "build:fast": "node scripts/build-review-deck.mjs --fast",
+    "test:fixtures": "node tests/validator-fixtures.mjs",
+    "install:browsers": "npx playwright install chromium"
+  }
+}
