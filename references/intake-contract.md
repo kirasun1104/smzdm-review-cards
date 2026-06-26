@@ -40,12 +40,12 @@ Unless the Fast-Generation Exception applies, use these gates:
 Ask this when the user has not supplied concrete source copy and has not explicitly asked for fast / one-shot generation:
 
 ```text
-还缺少生成卡片的具体内容。请选择一种方式：
-A. 由 AI 一键完成内容（推荐：适合只给了产品名/主题，AI 会查资料、整理事实模型，并尽量抓取优质图片素材）
-B. 用户提供内容（适合你有文章、笔记、链接、截图或产品事实；最好同时提供产品图/样张/截图，效果更好）
+还缺少生成卡片的具体内容。请选择一种方式，直接回 1/2：
+1. 由 AI 一键完成内容（推荐：适合只给了产品名/主题，AI 会查资料、整理事实模型，并尽量抓取优质图片素材）
+2. 用户提供内容（适合你有文章、笔记、链接、截图或产品事实；最好同时提供产品图/样张/截图，效果更好）
 ```
 
-If the user chooses A:
+If the user chooses option 1:
 
 - Treat this as permission to research and synthesize the source copy.
 - Do a focused fact-gathering pass for product facts, current/unstable facts, and credible source URLs.
@@ -53,7 +53,7 @@ If the user chooses A:
 - Record source URLs, unresolved facts, and AI-synthesized basis in `deck-data.json` / `assets/SOURCES.md`.
 - Do not invent hard prices, evidence images, sample results, review scores, rankings, or availability.
 
-If the user chooses B:
+If the user chooses option 2:
 
 - Ask one concise free-form follow-up for article text, notes, URL, screenshot/document, spec table, or product facts, and explicitly suggest attaching product photos, sample images, screenshots, price screenshots, or source-article images because the deck will look better with real evidence visuals.
 - Do not generate the deck until the user supplies enough content or switches to AI one-click completion.
@@ -111,11 +111,11 @@ Ask once when no credible assets are supplied:
 
 ```text
 这组评测结论卡需要 1-3 张证据图。三种走法：
-A. 上传产品图 / 样张 / 截图（推荐，最可信）
-B. 由 AI 助手查找官方 / 公开图并记录来源
-C. 先做无图信息版
+1. 上传产品图 / 样张 / 截图（推荐，最可信）
+2. 由 AI 助手查找官方 / 公开图并记录来源
+3. 先做无图信息版
 ```
 
-If B is chosen, do one focused search/download round only: one official/authorized source pass, one public product-image fallback if needed, and direct downloads only for assets whose provenance can be recorded in `assets/SOURCES.md`.
+If option 2 is chosen, do one focused search/download round only: one official/authorized source pass, one public product-image fallback if needed, and direct downloads only for assets whose provenance can be recorded in `assets/SOURCES.md`.
 
 If blocked or unreliable, switch to no-image information cards and record `deck-data.json.no_image_reason`. Do not keep retrying image search, probing official CDNs, or widening the search indefinitely.

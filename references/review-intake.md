@@ -19,9 +19,9 @@ If the user has not supplied concrete source copy, ask a single-select missing-c
 Missing-copy mode question:
 
 ```text
-还缺少生成卡片的具体内容。请选择一种方式：
-A. 由 AI 一键完成内容（推荐：适合只给了产品名/主题，AI 会查资料、整理事实模型，并尽量抓取优质图片素材）
-B. 用户提供内容（适合你有文章、笔记、链接、截图或产品事实；最好同时提供产品图/样张/截图，效果更好）
+还缺少生成卡片的具体内容。请选择一种方式，直接回 1/2：
+1. 由 AI 一键完成内容（推荐：适合只给了产品名/主题，AI 会查资料、整理事实模型，并尽量抓取优质图片素材）
+2. 用户提供内容（适合你有文章、笔记、链接、截图或产品事实；最好同时提供产品图/样张/截图，效果更好）
 ```
 
 Concrete source copy means at least one of:
@@ -67,7 +67,7 @@ Graphic surface rule: fallback labels and unresolved price status stay in `deck-
 
 For review decks, photos and screenshots are evidence, not decoration. If the user supplies no assets, ask the evidence-source question from `intake-contract.md` once.
 
-If B is chosen:
+If option 2 is chosen:
 
 - Use the image source ladder from `image-evidence.md`: user/source assets first, then brand-owned official assets, high-quality brand/editorial launch coverage, authorized storefronts such as Tmall/JD official shops, curated deal/community sources such as 什么值得买, and finally credible video screenshots. Do not let source priority override visual quality; skip JD/Tmall/store images with dominant watermarks, promo overlays, coupon panels, text-heavy detail slices, or unreadable/cropped embedded copy. Small corner brand/project signatures can pass when they do not cover the subject.
 - Try one focused image-finding round only. If the image is blocked by JS rendering, hotlink protection, missing media URLs, or unreliable CDN guessing, stop immediately.
@@ -77,7 +77,7 @@ If B is chosen:
 - Record provenance in `assets/SOURCES.md`.
 - Disclose sources in the final response.
 
-If C is chosen:
+If option 3 is chosen:
 
 - Use diagram/data/ledger structures.
 - Do not pretend an image comparison exists.
