@@ -48,7 +48,7 @@ These budgets keep content inside the registered templates. They are maximum vis
 
 | Page type | Hard max visible chars | Per-component guidance |
 | --- | ---: | --- |
-| `cover-verdict` | 180 | Title 8-18 Chinese chars; lead 22-42 chars; each hook 10-22 chars. |
+| `cover-verdict` | 180 | Title 8-22 Chinese chars; prefer 1-2 semantic lines with enough information to understand the buying question; lead 22-42 chars; each hook 10-22 chars. |
 | `evidence-sample` | 260 | Title 12-24 chars; interpretation notes 18-36 chars each; limitation 18-34 chars. |
 | `before-after-effect` | 300 | A/B labels 4-10 chars; change notes 12-24 chars each; limitation 18-34 chars. |
 | `variant-comparison` | 360 | Dimension labels 2-6 chars; row body 18-34 chars; decision strip 18-38 chars. |
@@ -88,6 +88,8 @@ Also avoid semantically broken title wraps. Do not let product/category compound
 ```html
 <h2 class="h-md"><span>纯木薯还是混合砂？</span><span>先看痛点。</span></h2>
 ```
+
+For cover-scale headlines, do not over-compress useful context just to keep the title short. Prefer one or two readable phrase lines that answer the buying question; only use a third line when necessary, then check image overlap and lower content rhythm after rendering.
 
 Preferred break points are after strong punctuation or thought boundaries: `？`, `：`, `；`, `，`, or between complete clauses. If there is still enough horizontal room, widen the registered text container or shorten the copy before accepting a mid-phrase wrap.
 

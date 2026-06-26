@@ -214,6 +214,9 @@ Pass only if:
 
 - Surface alternates between warm neutral and vivid coral fields across pages; the deck must not stay on one background color.
 - Giant condensed sans headlines dominate the page like an editorial homepage, with tight line-height and no negative letter spacing.
+- Cover headlines should normally use one or two semantic lines, not three-line fragments. Each line has enough width for a readable phrase, so prefer informative phrases like `早C晚A / 选谁` or `精华进阶 / 还是温和入门` over compressed riddle titles such as `肤感 / 先行` when the buying question needs clarity.
+- Use a third cover headline line only when the topic genuinely needs it. When a third line is used with the cover photo collage, the template moves the photo stack down; still verify that photos do not cover any headline text.
+- Seasonal covers support three evidence states: two-image collage by default, `cover-one-image` for a single enlarged real image, and `cover-no-image` when no credible cover image exists. In `cover-one-image`, tape must visually attach to the photo edge rather than float on the background. In `cover-no-image`, add a large editorial judgment phrase such as `别按热度买`, then use a compact decision layer plus the main comparison cards; do not make the whole cover a dull grid of boxed content, and do not leave it as only a title plus lead or two sparse cards.
 - Body copy is secondary and sits in clear modules, rows, or quiet zones.
 - Images are real evidence: product photos, swatches, try-on, fabric, texture, styling, shelf/store, or screenshot proof. No generated beauty/product/try-on evidence.
 - Photo rhythm uses stacked rectangular image cards, slight rotation, tape-like translucent strips, or hard editorial crops. Do not use soft lifestyle bokeh, gradient blobs, or ornamental florals.

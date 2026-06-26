@@ -287,6 +287,78 @@
         bottom: -38px;
       }
 
+      /* Cover titles are designed for one or two informative lines. If a
+         generated cover needs a third line, move the collage down so product
+         cards do not cover headline text. */
+      .hero-overlap:has(.h-xl span:nth-child(3)) .photo-stack {
+        bottom: -132px;
+      }
+
+      .hero-overlap:has(.h-xl span:nth-child(3)) .lead {
+        bottom: -254px;
+      }
+
+      .hero-overlap.cover-one-image .photo-card.main {
+        left: 86px;
+        top: 210px;
+        width: 760px;
+        height: 620px;
+        transform: rotate(-2.2deg);
+      }
+
+      .hero-overlap.cover-one-image .tape.one {
+        left: 214px;
+        top: 212px;
+        transform: rotate(-5deg);
+      }
+
+      .hero-overlap.cover-no-image {
+        min-height: 980px;
+      }
+
+      .hero-overlap.cover-no-image .no-image-panel {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -34px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+
+      .hero-overlap.cover-no-image .compare-card {
+        min-height: 250px;
+      }
+
+      .hero-overlap.cover-no-image .cover-decision {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 430px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+
+      .hero-overlap.cover-no-image .decision-cell {
+        min-height: 150px;
+      }
+
+      .hero-overlap.cover-no-image .cover-shout {
+        position: absolute;
+        left: 0;
+        bottom: 286px;
+        font-family: Impact, "Arial Black", "Helvetica Neue Condensed Black", var(--sans);
+        font-size: 118px;
+        line-height: .88;
+        font-weight: 1000;
+        letter-spacing: .04em;
+      }
+
+      .hero-overlap.cover-no-image .cover-shout span {
+        display: block;
+      }
+
       .evidence-layout {
         display: grid;
         grid-template-rows: auto 720px auto;
