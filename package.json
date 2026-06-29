@@ -14,5 +14,8 @@
     "build:fast": "node scripts/build-review-deck.mjs --fast",
     "test:fixtures": "node tests/validator-fixtures.mjs",
     "install:browsers": "npx playwright install chromium"
+  },
+  "dependencies": {
+    "playwright": "^1.61.0"
   }
 }

@@ -56,7 +56,7 @@ Do not reduce required setup questions to save time. Instead, save time after th
 - For CSS/color-only fixes, render the changed page first; do not repeat full validation until the final pass.
 - Use `build -- --validate-first` for final delivery, then inspect `output/contact-sheet.png` once.
 
-The scripts should be callable without dummy positional arguments. They auto-detect the bundled Codex Playwright package where possible; set `PLAYWRIGHT_MODULE_PATH` only when using a nonstandard local Playwright install.
+The scripts should be callable without dummy positional arguments. They auto-detect Playwright from the skill package, current project, or bundled Codex runtime when available; no path credential setup should be required.
 
 `npm run validate` and `npm run build` fail only on FAIL items. WARN items are advisory by default, following the social-card validator pattern. Use `validate:strict` or `build:strict` when warnings should be treated as blockers.
 

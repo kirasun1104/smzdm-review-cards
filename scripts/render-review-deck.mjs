@@ -26,13 +26,42 @@ const htmlPath = path.join(root, "index.html");
 const outputDir = path.join(root, "output");
 await mkdir(outputDir, { recursive: true });
 
+async function writeHtmlOnlyPreview(reason) {
+  await writeFile(path.join(outputDir, "index.html"), `<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Review Deck HTML Preview</title>
+    <style>
+      body { margin:0; background:#101114; color:#eef2f8; font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; }
+      main { max-width:760px; margin:12vh auto; padding:32px; }
+      h1 { margin:0 0 14px; font-size:24px; }
+      p { color:#c7cfdb; }
+      code { color:#fff; background:#20242c; padding:2px 6px; border-radius:4px; }
+      a { color:#9fc2ff; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>HTML preview only</h1>
+      <p>PNG rendering was skipped because the current environment does not provide Playwright rendering capability.</p>
+      <p><strong>Reason:</strong> ${String(reason).replace(/[<>&]/g, char => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;" }[char]))}</p>
+      <p>Open the editable deck directly: <a href="../index.html">../index.html</a></p>
+      <p>To enable PNG export, install dependencies with <code>npm install</code> and, when needed, <code>npx playwright install chromium</code>.</p>
+    </main>
+  </body>
+</html>
+`, "utf8");
+  console.warn("WARN: Playwright rendering is unavailable; generated output/index.html as an HTML-only preview.");
+  console.warn(`open ${pathToFileURL(path.join(outputDir, "index.html")).href}`);
+}
+
 try {
   var chromium = await loadChromium();
 } catch (error) {
-  console.error("FAIL: playwright is required for node-level poster rendering.");
-  console.error("Install Playwright, set PLAYWRIGHT_MODULE_PATH, or render manually from index.html.");
-  console.error(error.message);
-  process.exit(1);
+  await writeHtmlOnlyPreview(error.message);
+  process.exit(0);
 }
 
 let browser;
@@ -41,8 +70,8 @@ try {
 } catch (error) {
   const chromePath = chromeExecutablePath();
   if (!chromePath) {
-    console.error(`FAIL: Playwright browser missing and Google Chrome not found. ${error.message}`);
-    process.exit(1);
+    await writeHtmlOnlyPreview(`Playwright browser missing and Google Chrome not found. ${error.message}`);
+    process.exit(0);
   }
   browser = await chromium.launch({ headless: true, executablePath: chromePath });
 }
