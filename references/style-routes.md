@@ -236,7 +236,7 @@ Use only named palettes from the selected seed template unless the user provides
 - `lemon-yellow`: light retail / lifestyle lists.
 - `vivid-green`: efficiency, health, cleaning, future-facing comparisons.
 - `safety-orange`: risk, price-warning, avoid/pitfall pages.
-- In `lemon-yellow`, the small `.kicker` label uses a black field with yellow text for contrast; do not use yellow text on the default pale chip.
+- In `lemon-yellow`, yellow text is allowed on black/dark surfaces such as the small `.kicker`; on white, cool-grey, glass, or paper surfaces, use black ink instead of yellow text.
 - In `swiss-guide`, three-column `.issue-strip` / `.risk-strip` modules should visually match the rounded black `.solid-band` family rather than the older T-junction glass grid. For audience archetypes or final risk trios, prefer `strong + em` content inside this shared band language.
 - On `lemon-yellow` final accent pages, use black text, black rules, and black verdict-pill surfaces on the yellow field. Do not inherit the white-on-accent final-page treatment used by red, blue, green, or orange palettes.
 

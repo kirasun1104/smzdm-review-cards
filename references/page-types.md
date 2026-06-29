@@ -30,6 +30,20 @@ These floors prevent 3:4 cards from feeling thin. If a page cannot meet the floo
 
 Density applies before styling: each page should have a visible upper, middle, and lower content job. If a page looks thin, add a real decision layer from the source material (cost rule, risk, audience split, variant rule, checklist, or evidence interpretation) before adding route decoration.
 
+## Single-Page Module Variety
+
+Avoid repeating the same major layout module twice on one page when the content can be merged or expressed through another registered component. This keeps each card from feeling template-stamped.
+
+- Acceptable repetition: repeated `mag-row`, ledger rows, numbered rows, or small cards inside one intentional list, ledger, comparison grid, timeline, or audience-fit stack.
+- Avoid: two separate `mag-index` groups, two separate `compare-grid` groups, two adjacent `essay-note` blocks, two separate `risk-strip` / `issue-strip` bands, or two major three-column modules with the same framed/banded visual weight on one page, such as `mag-timeline` plus `mag-index`.
+- First fix: merge the repeated content into the existing module when it has the same decision job.
+- Second fix: convert the secondary content into a different registered component, such as one `essay-note`, one `risk-strip`, one `mag-timeline`, or one `compare-grid`.
+- Last fix: move weaker details to `deck-data.json`, `SOURCES.md`, or another page.
+
+Row-stack pages (`audience-fit`, `spec-price-ledger`, compact mechanism explanations, and tradeoff ledgers) may repeat `mag-row` because the row rhythm is the skeleton. The repetition to avoid is a second framed/banded module of the same visual family, not ordinary row stacking.
+
+In `warm-review`, three-column `risk-strip`, `issue-strip`, and `mag-index` treatments tend to behave as lower support bands. Do not use them to fill a mid-page gap after a hero comparison; use continuous `mag-row` rows or one `essay-note` instead.
+
 ## Quantified Evidence Retention
 
 When the source includes hard data such as a spec table, measured numbers, benchmark scores, rating counts, competitor distance/weight/noise figures, or price tiers, plan one visible evidence layer around the strongest numbers before writing HTML.

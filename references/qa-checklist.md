@@ -49,6 +49,7 @@ During iteration, use `build:fast`, `render -- --pages <n>`, or `validate -- --p
 - Footer top position is consistent across pages in one deck; rendered footer-top drift greater than 8px is a validation failure for every route/template.
 - Footer breathing room: the last content/support block stays at least 24px above the footer rule.
 - Each page has one focal device.
+- Each page avoids repeating the same major module twice unless it is one intentional list/grid skeleton. Merge repeated modules or convert the secondary content into a different registered component.
 - Notes, sources, limitations, captions, and footers follow `layout-discipline.md`; no loose absolutely-positioned support text.
 - Row groups use internal separators only; no doubled horizontal rules from adjacent ledgers, punch strips, colored blocks, or footers.
 - Components that switch from vertical list to horizontal grid clear old list separators; no column should inherit an extra top border from adjacent-sibling row rules.
