@@ -514,7 +514,7 @@ async function runRenderedChecks() {
   } catch (error) {
     const message = `rendered validation cannot run because Playwright is unavailable. ${error.message}`;
     if (allowRenderSkip) WARN(`${message} Output is QA-incomplete.`);
-    else FAIL(`${message} Install Playwright or pass --allow-render-skip only for drafts.`);
+    else FAIL(`${message} Install Playwright, set PLAYWRIGHT_MODULE_PATH, or pass --allow-render-skip only for drafts.`);
     return;
   }
 
@@ -529,7 +529,7 @@ async function runRenderedChecks() {
     if (!chromePath) {
       const message = `rendered validation cannot run because no Playwright browser is installed and Google Chrome was not found (${error.message}).`;
       if (allowRenderSkip) WARN(`${message} Output is QA-incomplete.`);
-      else FAIL(`${message} Install a Playwright browser, install Google Chrome, or pass --allow-render-skip only for drafts.`);
+      else FAIL(`${message} Install a Playwright browser, install Google Chrome, set PLAYWRIGHT_CHROME_EXECUTABLE, or pass --allow-render-skip only for drafts.`);
       return;
     }
     browser = await chromium.launch({
