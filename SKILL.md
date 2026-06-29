@@ -1,6 +1,6 @@
 ---
 name: smzdm-review-cards
-description: Generate SMZDM-style 3:4 product review verdict carousels from reviews, buying-guide articles, product links, screenshots, specs, sample photos, or notes. Use for cover verdicts, evidence pages, variant comparisons, audience fit, price/spec ledgers, and buy-wait-skip conclusions with one locked style route and palette.
+description: 生成什么值得买风格的 3:4 产品评测结论卡组。适用于评测文章、导购链接、产品参数、截图、样张和笔记，输出封面结论、证据页、版本对比、适合人群、价格/参数账本，以及买/等/跳判断；整套卡片使用统一视觉路线和配色。
 ---
 
 # SMZDM Review Cards
