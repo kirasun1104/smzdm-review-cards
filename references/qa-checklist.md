@@ -65,6 +65,9 @@ During iteration, use `build:fast`, `render -- --pages <n>`, or `validate -- --p
 - No overflow, edge touching, or footer collision.
 - No clipped text inside a fixed-height box.
 - Text inside cards, formulas, chips, verdict pills, risk strips, image wells, and other registered containers keeps a safe inset from component edges.
+- Light text must not sit on light grey, paper, pale accent, or translucent light modules. Use dark ink on light surfaces, or move white/light text onto a dark/accent surface with clear contrast.
+- When a text/background contrast check fails, fix the text color first. Do not add a new background, plate, tint, shadow, overlay, or filled surface just to pass contrast unless the selected route template already defines that surface for the component's visual role.
+- If rendered visual evidence shows the text is already on the correct visual surface but the validator misreads the background, fix the validator or route template rule narrowly. Do not alter the deck composition with extra background layers as a validator workaround.
 - Metric labels/chips keep visible breathing room from large numbers or prices.
 - Action labels such as `建议买 / 建议等 / 不建议` keep clear vertical spacing from their explanatory copy.
 - If text does not fit, use the documented fit actions: rewrite shorter, wrap normal body copy, split into another registered component, switch page type, or use a route-owned compact variant. Do not patch with inline font-size or squeezed spacing.

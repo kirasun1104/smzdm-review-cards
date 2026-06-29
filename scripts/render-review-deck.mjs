@@ -5,6 +5,7 @@ import { pathToFileURL } from "node:url";
 import { chromeExecutablePath, loadChromium } from "./playwright-loader.mjs";
 
 const args = process.argv.slice(2);
+const skipContactSheet = args.includes("--skip-contact-sheet") || args.includes("--no-contact-sheet");
 const pagesArgIndex = args.findIndex(arg => arg === "--pages");
 const ignoredArgIndexes = new Set();
 if (pagesArgIndex >= 0) {
@@ -16,7 +17,7 @@ const selectedPages = pagesArgIndex >= 0 && args[pagesArgIndex + 1]
   ? new Set(args[pagesArgIndex + 1].split(",").map(value => Number(value.trim())).filter(Number.isFinite))
   : null;
 if (!taskDir) {
-  console.error("Usage: render-review-deck.mjs <task-dir> [--pages 1,3,7]");
+  console.error("Usage: render-review-deck.mjs <task-dir> [--pages 1,3,7] [--skip-contact-sheet]");
   process.exit(1);
 }
 
@@ -177,7 +178,7 @@ if (renderedPosters.length) {
   console.log(`open ${pathToFileURL(path.join(outputDir, "index.html")).href}`);
 }
 
-if (!selectedPages && renderedPosters.length) {
+if (!selectedPages && renderedPosters.length && !skipContactSheet) {
   const sheet = await browser.newPage({ viewport: { width: 1800, height: 1400 }, deviceScaleFactor: 1 });
   const cards = (await Promise.all(renderedPosters.map(async poster => {
     const bytes = await readFile(path.join(outputDir, poster.filename));

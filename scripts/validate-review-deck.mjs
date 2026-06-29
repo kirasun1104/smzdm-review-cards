@@ -567,6 +567,65 @@ async function runRenderedChecks() {
       return false;
     }
 
+    function parseCssColor(value) {
+      const match = String(value || "").match(/rgba?\(([^)]+)\)/i);
+      if (!match) return null;
+      const parts = match[1].split(/,\s*/).map(part => part.trim());
+      const channels = parts.slice(0, 3).map(part => {
+        if (part.endsWith("%")) return Math.round(Number.parseFloat(part) * 2.55);
+        return Number.parseFloat(part);
+      });
+      if (channels.some(channel => !Number.isFinite(channel))) return null;
+      const alpha = parts[3] == null ? 1 : Number.parseFloat(parts[3]);
+      return { r: channels[0], g: channels[1], b: channels[2], a: Number.isFinite(alpha) ? alpha : 1 };
+    }
+
+    function blendColor(fg, bg) {
+      const alpha = Math.max(0, Math.min(1, fg.a ?? 1));
+      return {
+        r: fg.r * alpha + bg.r * (1 - alpha),
+        g: fg.g * alpha + bg.g * (1 - alpha),
+        b: fg.b * alpha + bg.b * (1 - alpha),
+        a: 1,
+      };
+    }
+
+    function relativeLuminance(color) {
+      const channel = value => {
+        const c = Math.max(0, Math.min(255, value)) / 255;
+        return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+      };
+      return 0.2126 * channel(color.r) + 0.7152 * channel(color.g) + 0.0722 * channel(color.b);
+    }
+
+    function contrastRatio(a, b) {
+      const l1 = relativeLuminance(a);
+      const l2 = relativeLuminance(b);
+      const light = Math.max(l1, l2);
+      const dark = Math.min(l1, l2);
+      return (light + 0.05) / (dark + 0.05);
+    }
+
+    function effectiveBackgroundColor(node, poster) {
+      let current = node;
+      const layers = [];
+      while (current && current.nodeType === 1) {
+        const cs = getComputedStyle(current);
+        const color = parseCssColor(cs.backgroundColor);
+        if (color && color.a > 0) {
+          layers.push(color);
+          if (color.a >= 0.98) break;
+        }
+        if (current === poster) break;
+        current = current.parentElement;
+      }
+      let bg = { r: 255, g: 255, b: 255, a: 1 };
+      for (const layer of layers.reverse()) {
+        bg = blendColor(layer, bg);
+      }
+      return bg;
+    }
+
     function chineseSingleCharWidows(root) {
       const findings = [];
       const isCjk = value => /[\u3400-\u9fff]/.test(value);
@@ -708,6 +767,7 @@ async function runRenderedChecks() {
       const componentEscapes = [];
       const componentSpacingIssues = [];
       const ruleCollisions = [];
+      const contrastIssues = [];
       const chineseWidows = chineseSingleCharWidows(el);
       const textRole = node => {
         const cls = String(node.className || "");
@@ -739,6 +799,36 @@ async function runRenderedChecks() {
         const clipsOverflow = /^(?:hidden|clip|auto|scroll)$/.test(cs.overflowX) || /^(?:hidden|clip|auto|scroll)$/.test(cs.overflowY);
         if (isText && clipsOverflow && (node.scrollWidth - node.clientWidth > 2 || node.scrollHeight - node.clientHeight > 2)) {
           clippedText.push(`${tag}.${cls.split(/\s+/).slice(0, 2).join(".")} "${text}"`);
+        }
+        if (isText && text && !node.closest(".foot, .magazine-foot")) {
+          const fgRaw = parseCssColor(cs.color);
+          let bgRaw = effectiveBackgroundColor(node, el);
+          if (
+            deckStyle === "blue-stack"
+            && el.classList.contains("hero-blue")
+            && node.closest(".metric-grid")
+          ) {
+            // Blue Stack hero covers use an absolute gradient field behind the
+            // content. The lower metric grid sits on the pale end of that field,
+            // but computed parent background colors resolve to the poster's
+            // black base. Treat this route-owned area as the pale field so the
+            // contrast validator preserves the intended black metric text.
+            bgRaw = { r: 238, g: 240, b: 243, a: 1 };
+          }
+          if (fgRaw && bgRaw) {
+            const opacity = Number.parseFloat(cs.opacity);
+            const fg = Number.isFinite(opacity) && opacity < 1 ? { ...fgRaw, a: (fgRaw.a ?? 1) * opacity } : fgRaw;
+            const effectiveFg = fg.a != null && fg.a < 1 ? blendColor(fg, bgRaw) : fg;
+            const ratio = contrastRatio(effectiveFg, bgRaw);
+            const fgLum = relativeLuminance(effectiveFg);
+            const bgLum = relativeLuminance(bgRaw);
+            const lightTextOnLightSurface = fgLum > 0.58 && bgLum > 0.58 && ratio < 3;
+            const nearlyInvisible = ratio < 1.5;
+            if (lightTextOnLightSurface || nearlyInvisible) {
+              const reason = lightTextOnLightSurface ? "light text on light surface" : "near-invisible contrast";
+              contrastIssues.push(`${tag}.${cls.split(/\s+/).slice(0, 2).join(".")} "${text}" ${reason}, contrast ${ratio.toFixed(2)}:1`);
+            }
+          }
         }
         if (!isDecor && (isText || isMedia)) {
           const leftGap = r.left - rect.left;
@@ -878,6 +968,7 @@ async function runRenderedChecks() {
         componentEscapes,
         componentSpacingIssues,
         ruleCollisions,
+        contrastIssues,
         chineseWidows,
       };
     }
@@ -991,6 +1082,9 @@ async function runRenderedChecks() {
     }
     if (item.componentSpacingIssues.length) {
       FAIL(`${label}: component spacing is too tight: ${item.componentSpacingIssues.slice(0, 3).join(" | ")}${item.componentSpacingIssues.length > 3 ? " ..." : ""}`);
+    }
+    if (item.contrastIssues.length) {
+      FAIL(`${label}: low text/background contrast: ${item.contrastIssues.slice(0, 4).join(" | ")}${item.contrastIssues.length > 4 ? " ..." : ""}. Fix text color for the existing surface; move text only to an already route-defined dark/accent surface, never add a new background just to pass contrast.`);
     }
     if (item.chineseWidows.length) {
       FAIL(`${label}: Chinese single-character widow line found: ${item.chineseWidows.slice(0, 3).join(" | ")}${item.chineseWidows.length > 3 ? " ..." : ""}. Rewrite shorter, split the text, or move detail; do not patch with tiny type or invisible characters.`);

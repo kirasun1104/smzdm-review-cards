@@ -17,7 +17,7 @@ Use this file as the default operating guide for speed. Read the longer referenc
 11. Run full validation only before final delivery or when the user asks for validation. For final delivery, prefer `--validate-first` so blocker failures are caught before exporting a full PNG set.
 12. In the final response, always include the exported image directory path: `<task-dir>/output/`. Also include the contact sheet or preview HTML, but do not omit the image directory.
 
-`render-review-deck.mjs` writes individual page PNGs, `output/contact-sheet.png`, and a quick image gallery at `output/index.html` for opening or downloading generated images.
+`render-review-deck.mjs` writes individual page PNGs, `output/contact-sheet.png`, and a quick image gallery at `output/index.html` for opening or downloading generated images. Use `--skip-contact-sheet` during iteration when the HTML gallery is enough.
 
 Commands:
 
@@ -29,6 +29,7 @@ npm run validate:strict -- <task-dir>
 npm run validate -- <task-dir> -- --pages 3
 npm run render -- <task-dir> -- --pages 1,3,7
 npm run build:fast -- <task-dir> -- --pages 3
+npm run build:fast -- <task-dir> -- --skip-contact-sheet
 npm run build -- <task-dir> -- --pages 3
 npm run build -- <task-dir> -- --validate-first
 npm run build:strict -- <task-dir>
@@ -40,7 +41,7 @@ Shortcut:
 npm run build -- <task-dir>
 ```
 
-Use `build:fast` / `--fast` while iterating when you only need text preflight plus fresh renders. Use `build -- --pages 3` or `validate -- --pages 3` when only one poster changed and you want rendered checks for that page. Run full validation before final delivery; use `build -- --validate-first` for the last pass so rendered-check blockers are caught before exporting a full PNG set. Use `build:strict` / `validate:strict` only when advisory warnings should block delivery.
+Use `build:fast` / `--fast` while iterating when you only need text preflight plus fresh renders. For CSS/color/copy fixes after one full pass, prefer `render -- --pages <n>` or `build:fast -- --pages <n>` instead of another full build. Add `--skip-contact-sheet` during iteration when the HTML gallery is enough; final delivery may use `output/index.html` as the preview link if no fresh contact sheet was generated. Use `build -- --pages 3` or `validate -- --pages 3` when only one poster changed and you want rendered checks for that page. Run full validation before final delivery; use `build -- --validate-first` for the last pass so rendered-check blockers are caught before exporting a full PNG set. Use `build:strict` / `validate:strict` only when advisory warnings should block delivery.
 
 ## Speed Discipline Without Cutting Questions
 
@@ -52,6 +53,7 @@ Do not reduce required setup questions to save time. Instead, save time after th
 - Create `deck-data.json`, `SOURCES.md`, and the HTML in one edit pass before first render.
 - Run `validate:text` before any render; it catches cheap blockers without launching a browser.
 - Iterate with `build:fast -- --pages <n>` for changed pages only.
+- For CSS/color-only fixes, render the changed page first; do not repeat full validation until the final pass.
 - Use `build -- --validate-first` for final delivery, then inspect `output/contact-sheet.png` once.
 
 The scripts should be callable without dummy positional arguments. They auto-detect the bundled Codex Playwright package where possible; set `PLAYWRIGHT_MODULE_PATH` only when using a nonstandard local Playwright install.
